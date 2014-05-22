@@ -77,6 +77,25 @@ application_window_new (GtkApplication *application)
 
 
 static void
+prev_song_action_activated (GSimpleAction *action,
+                            GVariant      *parameter,
+                            gpointer       userdata)
+{
+    // TODO: Implement
+}
+
+
+static void
+next_song_action_activated (GSimpleAction *action,
+                            GVariant      *parameter,
+                            gpointer       userdata)
+{
+    // TODO: Implement
+}
+
+
+
+static void
 toggle_play_action_activated (GSimpleAction *action,
                               GVariant      *parameter,
                               gpointer       userdata)
@@ -115,9 +134,11 @@ quit_action_activated (GSimpleAction *action,
 
 
 static const GActionEntry app_actions[] = {
-    { "toggle-play", toggle_play_action_activated, NULL, NULL, NULL },
-    { "about",       about_action_activated,       NULL, NULL, NULL },
-    { "quit",        quit_action_activated,        NULL, NULL, NULL },
+    { "next-song",     next_song_action_activated,   NULL, NULL, NULL },
+    { "previous-song", prev_song_action_activated,   NULL, NULL, NULL },
+    { "toggle-play",   toggle_play_action_activated, NULL, NULL, NULL },
+    { "about",         about_action_activated,       NULL, NULL, NULL },
+    { "quit",          quit_action_activated,        NULL, NULL, NULL },
 };
 
 
