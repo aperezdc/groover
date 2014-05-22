@@ -186,7 +186,12 @@ application_started (GtkApplication *application)
 static void
 application_activated (GtkApplication *application)
 {
-    gtk_widget_show_all (application_window_new (application));
+    static GtkWidget *main_window = NULL;
+
+    if (!main_window)
+        main_window = application_window_new (application);
+    gtk_widget_show_all (main_window);
+    gtk_window_present (GTK_WINDOW (main_window));
 }
 
 
