@@ -1,0 +1,13 @@
+[Desktop Entry]
+Hidden=false
+Name=Groover
+Exec=groover
+TryExec=groover
+Icon=gnome-music
+Comment=Control the Groove Basin music player daemon
+Type=Application
+NoDisplay=false
+StartupNotify=true
+StartupWMClass=Groover
+Categories=GNOME;GTK;Multimedia;
+Terminal=false

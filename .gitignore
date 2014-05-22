@@ -1,0 +1,4 @@
+*.o
+groover
+*.py[co]
+.*.sw[op]
