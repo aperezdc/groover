@@ -83,12 +83,39 @@ application_window_new (GtkApplication *application)
 }
 
 
+static WebKitWebView *
+application_find_web_view (GtkApplication *application)
+{
+    GtkWindow *window = gtk_application_get_active_window (application);
+    return WEBKIT_WEB_VIEW (gtk_bin_get_child (GTK_BIN (window)));
+}
+
+
+static void
+run_javascript_finished_discard_result (GObject      *object,
+                                        GAsyncResult *result,
+                                        gpointer      userdata)
+{
+    WebKitJavascriptResult *js_result =
+        webkit_web_view_run_javascript_finish (WEBKIT_WEB_VIEW (object),
+                                               result,
+                                               NULL);
+    webkit_javascript_result_unref (js_result);
+}
+
+
 static void
 prev_song_action_activated (GSimpleAction *action,
                             GVariant      *parameter,
                             gpointer       userdata)
 {
-    // TODO: Implement
+    WebKitWebView *web_view =
+        application_find_web_view (GTK_APPLICATION (userdata));
+    webkit_web_view_run_javascript (web_view,
+                                    "_debug_player.prev()",
+                                    NULL,
+                                    run_javascript_finished_discard_result,
+                                    NULL);
 }
 
 
@@ -97,7 +124,13 @@ next_song_action_activated (GSimpleAction *action,
                             GVariant      *parameter,
                             gpointer       userdata)
 {
-    // TODO: Implement
+    WebKitWebView *web_view =
+        application_find_web_view (GTK_APPLICATION (userdata));
+    webkit_web_view_run_javascript (web_view,
+                                    "_debug_player.next()",
+                                    NULL,
+                                    run_javascript_finished_discard_result,
+                                    NULL);
 }
 
 
@@ -107,7 +140,15 @@ toggle_play_action_activated (GSimpleAction *action,
                               GVariant      *parameter,
                               gpointer       userdata)
 {
-    // TODO: Implement
+    WebKitWebView *web_view =
+        application_find_web_view (GTK_APPLICATION (userdata));
+    webkit_web_view_run_javascript (web_view,
+                                    "_debug_player.isPlaying"
+                                    "  ? _debug_player.pause()"
+                                    "  : _debug_player.play()",
+                                    NULL,
+                                    run_javascript_finished_discard_result,
+                                    NULL);
 }
 
 
