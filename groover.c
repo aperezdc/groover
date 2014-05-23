@@ -33,6 +33,7 @@ add_transport_buttons (GtkContainer *container)
     for (guint i = 0; i < G_N_ELEMENTS (button_map); i++) {
         GtkWidget *button = gtk_button_new_from_icon_name (button_map[i].icon,
                                                            GTK_ICON_SIZE_BUTTON);
+        gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
         gtk_style_context_add_class (gtk_widget_get_style_context (button), "image-button");
         gtk_style_context_add_class (gtk_widget_get_style_context (button), "linked");
         gtk_actionable_set_action_name (GTK_ACTIONABLE (button),
